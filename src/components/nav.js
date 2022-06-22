@@ -1,35 +1,51 @@
 import React from "react";
-import { useState } from "react";
+import { useEffect } from "react";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 export default function Nav() {
-  const btnStyle = { display: "flex", gap: "1rem" };
+  useEffect(() => {
+    let sidenav = document.querySelector("#slide-out");
+    M.Sidenav.init(sidenav, {});
+  }, []);
+
+  const marginRight = { marginRight: "1rem" };
   return (
     <>
       <nav>
         <div className="nav-wrapper">
+          <a
+            href="#"
+            className="brand-logo left hide-on-med-and-down"
+            style={{ marginLeft: "1rem" }}
+          >
+            Logo dito
+          </a>
           <a href="#!" className="brand-logo center">
             Di pako sure ano name
           </a>
-          <a href="#" datatarget="mobile-demo" className="sidenav-trigger">
+          <a href="#" data-target="slide-out" className="sidenav-trigger">
             <i className="material-icons">menu</i>
           </a>
-          <ul className="right hide-on-med-and-down" style={{ btnStyle }}>
-            <li>
-              <button className="btn">Settings</button>
-            </li>
-            <li>
-              <button className="btn">About</button>
-            </li>
-          </ul>
+
+          <div
+            id="nav-mobile"
+            className="right hide-on-med-and-down center-align"
+            style={marginRight}
+          >
+            <button className="btn" style={marginRight}>
+              Settings
+            </button>
+            <button className="btn">About</button>
+          </div>
         </div>
       </nav>
 
-      <ul className="sidenav" style={{ display: "none" }}>
+      <ul id="slide-out" className="sidenav">
         <li>
-          <button>Settings</button>
+          <a href="#">Settings</a>
         </li>
         <li>
-          <button>Components</button>
+          <a href="#">About</a>
         </li>
       </ul>
     </>
