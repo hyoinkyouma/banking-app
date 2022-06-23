@@ -31,13 +31,13 @@ function WithdrawModal(prop) {
         </h5>
         <div className="input-field col s6" style={{ marginTop: "2rem" }}>
           <input
-            id="last_name"
+            id="widthdraw"
             type="number"
             className="validate"
             value={amount === 0 ? "" : amount}
             onChange={handleInput}
           />
-          <label htmlFor="last_name">Withdraw Amount</label>
+          <label htmlFor="widthdraw">Withdraw Amount</label>
         </div>
         <button
           className="btn modal-close waves-effect waves-green"
