@@ -6,7 +6,7 @@ function WithdrawModal(prop) {
   const [amount, setAmout] = useState(0);
 
   const handleInput = (event) => {
-    if (event.target.value > prop.balance) return;
+    //if (event.target.value > prop.balance) return;
     setAmout(Number(event.target.value));
   };
 
@@ -15,6 +15,13 @@ function WithdrawModal(prop) {
       withdraw(Number(prop.balance), Number(amount), transactionLogging)
     );
     setAmout(0);
+  };
+
+  const handleEnterKey = (e) => {
+    if (e.key === "Enter") {
+      const submit = document.querySelectorAll(".modal-close");
+      submit[1].click();
+    }
   };
 
   return (
@@ -36,11 +43,12 @@ function WithdrawModal(prop) {
             className="validate"
             value={amount === 0 ? "" : amount}
             onChange={handleInput}
+            onKeyDown={handleEnterKey}
           />
           <label htmlFor="widthdraw">Withdraw Amount</label>
         </div>
         <button
-          className="btn modal-close waves-effect waves-green"
+          className="btn modal-close waves-effect waves-green deposit-modal"
           onClick={changeBalanceDeposit}
         >
           Submit

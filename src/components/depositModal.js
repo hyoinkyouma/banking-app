@@ -16,6 +16,13 @@ function DepositModal(prop) {
     setAmout(0);
   };
 
+  const handleEnterKey = (e) => {
+    if (e.key === "Enter") {
+      const submit = document.querySelectorAll(".modal-close");
+      submit[0].click();
+    }
+  };
+
   return (
     <div
       id="depositModal"
@@ -35,11 +42,12 @@ function DepositModal(prop) {
             className="validate"
             value={amount === 0 ? "" : amount}
             onChange={handleInput}
+            onKeyDown={handleEnterKey}
           />
           <label htmlFor="last_name">Deposit Amount</label>
         </div>
         <button
-          className="btn modal-close waves-effect waves-green"
+          className="btn modal-close deposit-modal waves-effect waves-green"
           onClick={changeBalanceDeposit}
         >
           Submit
