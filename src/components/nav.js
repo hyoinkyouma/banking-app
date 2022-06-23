@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 
@@ -12,7 +11,7 @@ export default function Nav() {
   return (
     <>
       <nav>
-        <div className="nav-wrapper">
+        <div className="nav-wrapper blue-grey darken-3">
           <a
             href="#"
             className="brand-logo left hide-on-med-and-down"
