@@ -18,7 +18,13 @@ function LoginScreen(prop) {
     }
   };
 
-  const handleEnter = () => {};
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      const btn = document.querySelector(".btn-login");
+      btn.click();
+      console.log(btn);
+    }
+  };
 
   return (
     <>
@@ -36,6 +42,7 @@ function LoginScreen(prop) {
                   id="username"
                   value={inputEmail}
                   onChange={handleInputEmail}
+                  onKeyDown={handleEnter}
                 />
               </div>
               <br />
@@ -52,7 +59,7 @@ function LoginScreen(prop) {
               <br />
               <div className="html-field center">
                 <button
-                  className="btn-large waves-effect blue-grey darken-1 waves-dark"
+                  className="btn btn-login waves-effect blue-grey darken-1 waves-dark"
                   onClick={handleLogin}
                 >
                   Login
