@@ -17,6 +17,9 @@ function LoginScreen(prop) {
       prop.setLogin(true);
     }
   };
+
+  const handleEnter = () => {};
+
   return (
     <>
       <div className="row">
@@ -43,6 +46,7 @@ function LoginScreen(prop) {
                   id="password"
                   value={inputPassword}
                   onChange={handleInputPass}
+                  onKeyDown={handleEnter}
                 />
               </div>
               <br />

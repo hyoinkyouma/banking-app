@@ -6,7 +6,7 @@ function WithdrawModal(prop) {
   const [amount, setAmout] = useState(0);
 
   const handleInput = (event) => {
-    //if (event.target.value > prop.balance) return;
+    if (event.target.value > prop.balance) return;
     setAmout(Number(event.target.value));
   };
 
