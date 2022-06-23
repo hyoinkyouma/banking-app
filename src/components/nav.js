@@ -34,7 +34,7 @@ export default function Nav() {
             <button className="btn" style={marginRight}>
               Settings
             </button>
-            <button className="btn">About</button>
+            <button className="btn">Logout</button>
           </div>
         </div>
       </nav>
@@ -44,7 +44,7 @@ export default function Nav() {
           <a href="#">Settings</a>
         </li>
         <li>
-          <a href="#">About</a>
+          <a href="#">Logout</a>
         </li>
       </ul>
     </>

@@ -8,17 +8,26 @@ import "./style.css";
 import LoginScreen from "./components/loginscreen";
 
 function App() {
-  const [balance, setStateBalance] = useState(56000);
+  const [balance, setStateBalance] = useState(0);
   const [isLoggedIn, setLogin] = useState(false);
+  const [userId, setUserId] = useState(1);
 
-  const user = {
-    name: "Roman Cabalum",
-    status: "Active Account",
-    balance: balance,
-  };
+  const user = [
+    {
+      name: "Roman Cabalum",
+      status: "Active Account",
+      balance: 57000,
+    },
+    {
+      name: "Piolo Pascual",
+      status: "Active Account",
+      balance: 10000000000,
+    },
+  ];
 
   const registeredUsers = [
-    { email: "roman.cabalum@gmail.com", password: "1234" },
+    { email: "roman.cabalum@gmail.com", password: "1234", id: 0 },
+    { email: "papaP@gmail.com", password: "1234", id: 1 },
   ];
 
   if (isLoggedIn === true) {
@@ -26,20 +35,20 @@ function App() {
       <>
         <Nav />
         <Userinfo
-          name={user.name}
-          status={user.status}
-          balanceStr={financialUtils.numToFinString.format(user.balance)}
+          name={user[userId].name}
+          status={user[userId].status}
+          balanceStr={financialUtils.numToFinString.format(balance)}
           balance={balance}
           setBalance={setStateBalance}
         />
         <DepositModal
           balance={balance}
-          balanceStr={financialUtils.numToFinString.format(user.balance)}
+          balanceStr={financialUtils.numToFinString.format(balance)}
           setBalance={setStateBalance}
         />
         <WithdrawModal
           balance={balance}
-          balanceStr={financialUtils.numToFinString.format(user.balance)}
+          balanceStr={financialUtils.numToFinString.format(balance)}
           setBalance={setStateBalance}
         />
       </>
@@ -48,7 +57,13 @@ function App() {
     return (
       <>
         <Nav />
-        <LoginScreen setLogin={setLogin} registeredUsers={registeredUsers} />
+        <LoginScreen
+          setLogin={setLogin}
+          registeredUsers={registeredUsers}
+          setUserId={setUserId}
+          regUser={user}
+          setBalance={setStateBalance}
+        />
       </>
     );
   }

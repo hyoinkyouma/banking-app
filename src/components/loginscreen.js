@@ -12,17 +12,20 @@ function LoginScreen(prop) {
   };
 
   const handleLogin = () => {
-    const { email, password } = prop.registeredUsers[0];
-    if (email === inputEmail && password === inputPassword) {
-      prop.setLogin(true);
-    }
+    prop.registeredUsers.forEach((user) => {
+      if (user.email === inputEmail && user.password === inputPassword) {
+        prop.setUserId(user.id);
+        prop.setBalance(prop.regUser[user.id].balance);
+        prop.setLogin(true);
+        console.log(prop.regUser[user.id].balance);
+      }
+    });
   };
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       const btn = document.querySelector(".btn-login");
       btn.click();
-      console.log(btn);
     }
   };
 
