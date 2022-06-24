@@ -7,6 +7,7 @@ function ExchangeRates() {
   const [phpInput, setPhpInput] = useState(0);
   const [targetInput, setTargetInput] = useState(0);
   const [inputsActive, setInputsActive] = useState("notActive");
+  const [isWrong, setIsWrong] = useState(false);
   const [rates, setRates] = useState({
     usd: {
       rate: 0,
@@ -46,8 +47,6 @@ function ExchangeRates() {
   };
 
   useEffect(() => {
-    console.log(rates);
-    console.log(currency);
     fetcher((data) => {
       setRates(data);
     });
@@ -65,8 +64,7 @@ function ExchangeRates() {
             <div style={{ display: "flex", width: "100%", gap: "5rem" }}>
               <div className="input-field white-text center">
                 <input
-                  id="php"
-                  type="number"
+                  type="text"
                   className="validate white-text"
                   value={
                     Number(phpInput) === 0
@@ -74,41 +72,52 @@ function ExchangeRates() {
                       : Math.round(phpInput * 100) / 100
                   }
                   onChange={(e) => {
-                    setPhpInput(e.target.value);
-                    setTargetInput(e.target.value * rates[currency].rate);
+                    if (!Number(e.target.value) && e.target.value != 0) {
+                      setIsWrong(true);
+                    } else {
+                      setPhpInput(e.target.value);
+                      setTargetInput(e.target.value * rates[currency].rate);
+                      setIsWrong(false);
+                    }
                   }}
                   onClick={() => {
                     setInputsActive("active");
                   }}
                 />
-                <label htmlFor="php" className={inputsActive}>
-                  Philippine Peso (PHP)
-                </label>
+                <label className={inputsActive}>Philippine Peso (PHP)</label>
               </div>
               <div className="input-field">
                 <input
-                  id="target"
-                  type="number"
+                  type="text"
                   className="validate white-text"
                   value={
                     targetInput === 0 ? "" : Math.round(targetInput * 100) / 100
                   }
                   onChange={(e) => {
-                    setTargetInput(e.target.value);
-                    setPhpInput(e.target.value / rates[currency].rate);
+                    if (!Number(e.target.value) && e.target.value != 0) {
+                      setIsWrong(true);
+                    } else {
+                      setTargetInput(e.target.value);
+                      setPhpInput(e.target.value / rates[currency].rate);
+                      setIsWrong(false);
+                    }
                   }}
                   onClick={() => {
                     setInputsActive("active");
-                    console.log(inputsActive);
                   }}
+                  style={{ zIndex: "100" }}
                 />
-                <label htmlFor="target" className={inputsActive}>
+
+                <label className={inputsActive} style={{ zIndex: "1" }}>
                   {financialUtils.titleCase(rates[currency].currency) +
                     " " +
                     `(${rates[currency].code})`.toUpperCase()}
                 </label>
               </div>
             </div>
+            <p className="red-text">
+              {isWrong ? "Please enter a number." : ""}
+            </p>
           </div>
 
           <div className="card-action">
