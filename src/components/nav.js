@@ -58,7 +58,13 @@ export default function Nav(props) {
           <a href="#">Settings</a>
         </li>
         <li>
-          <a href="#" onClick={logout}>
+          <a
+            href="#"
+            style={{
+              display: props.showLogout === true ? "" : "none",
+            }}
+            onClick={logout}
+          >
             Logout
           </a>
         </li>

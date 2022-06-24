@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import financialUtils from "./utils/financialUtils";
 import "./style.css";
 import LoginScreen from "./components/loginscreen";
+import ExchangeRates from "./components/ExchangeRates";
 
 function App() {
   const [balance, setStateBalance] = useState(0);
@@ -61,6 +62,7 @@ function App() {
           balance={balance}
           setBalance={setStateBalance}
         />
+        <ExchangeRates />
         <DepositModal
           balance={balance}
           balanceStr={financialUtils.numToFinString.format(balance)}
