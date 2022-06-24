@@ -10,6 +10,7 @@ export default function Nav(props) {
   const logout = () => {
     props.setLogin(false);
     props.setUserId(null);
+    window.localStorage.clear();
   };
 
   const marginRight = { marginRight: "1rem" };

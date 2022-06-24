@@ -14,8 +14,9 @@ function App() {
 
   const checkIfLoggedIn = () => {
     const currentUser = window.localStorage.getItem("currentUser");
-    if (currentUser !== undefined) {
+    if (currentUser !== null) {
       setUserId(Number(currentUser));
+      setStateBalance(user[currentUser].balance);
       setLogin(true);
     }
   };
