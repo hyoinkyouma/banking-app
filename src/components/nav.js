@@ -1,11 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-export default function Nav() {
+export default function Nav(props) {
   useEffect(() => {
     let sidenav = document.querySelector("#slide-out");
     M.Sidenav.init(sidenav, {});
   }, []);
+
+  const logout = () => {
+    props.setLogin(false);
+    props.setUserId(null);
+    window.localStorage.clear();
+  };
 
   const marginRight = { marginRight: "1rem" };
   return (
@@ -34,7 +40,15 @@ export default function Nav() {
             <button className="btn" style={marginRight}>
               Settings
             </button>
-            <button className="btn">Logout</button>
+            <button
+              className="btn red light-3"
+              style={{
+                display: props.showLogout === true ? "" : "none",
+              }}
+              onClick={logout}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </nav>
@@ -44,7 +58,15 @@ export default function Nav() {
           <a href="#">Settings</a>
         </li>
         <li>
-          <a href="#">Logout</a>
+          <a
+            href="#"
+            style={{
+              display: props.showLogout === true ? "" : "none",
+            }}
+            onClick={logout}
+          >
+            Logout
+          </a>
         </li>
       </ul>
     </>
