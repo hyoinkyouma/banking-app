@@ -37,18 +37,18 @@ export default function Nav(props) {
             className="right hide-on-med-and-down center-align"
             style={marginRight}
           >
-            <button className="btn" style={marginRight}>
-              Settings
-            </button>
             <button
-              className="btn red light-3"
-              style={{
-                display: props.showLogout === true ? "" : "none",
-              }}
+              className={
+                props.isLoggedIn === true
+                  ? "btn red light-3 waves-effect scale-out scale-transition scale-in"
+                  : "btn red light-3 waves-effect scale-out scale-transition"
+              }
               onClick={logout}
+              style={marginRight}
             >
               Logout
             </button>
+            <button className="btn waves-effect">Settings</button>
           </div>
         </div>
       </nav>

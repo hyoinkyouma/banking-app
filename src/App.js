@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     checkIfLoggedIn();
-  }, []);
+  }, [isLoggedIn]);
 
   const user = [
     {

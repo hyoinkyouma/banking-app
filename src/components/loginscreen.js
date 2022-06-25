@@ -76,7 +76,7 @@ function LoginScreen(prop) {
                 </p>
                 <br />
                 <button
-                  className="btn btn-login waves-effect blue-grey darken-1 waves-dark"
+                  className="btn btn-login btn-large waves-effect blue-grey darken-1 waves-dark"
                   onClick={handleLogin}
                 >
                   Login

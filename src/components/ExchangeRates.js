@@ -58,12 +58,13 @@ function ExchangeRates() {
   return (
     <div className="row">
       <div className="col s12 m6">
-        <div className="card blue-grey darken-1">
+        <div className="z-depth-3 hoverable card blue-grey darken-1">
           <div className="card-content white-text">
             <span className="card-title">Peso Exchange Rates</span>
-            <div style={{ display: "flex", width: "100%", gap: "5rem" }}>
-              <div className="input-field white-text center">
+            <div className="row" style={{ marginBottom: "0" }}>
+              <div className="input-field col s12 m6 white-text center">
                 <input
+                  id="peso"
                   type="text"
                   className="validate white-text"
                   value={
@@ -84,10 +85,13 @@ function ExchangeRates() {
                     setInputsActive("active");
                   }}
                 />
-                <label className={inputsActive}>Philippine Peso (PHP)</label>
+                <label htmlFor="peso" className={inputsActive}>
+                  Philippine Peso (PHP)
+                </label>
               </div>
-              <div className="input-field">
+              <div className="input-field col s12 m6 white-text center">
                 <input
+                  id="target"
                   type="text"
                   className="validate white-text"
                   value={
@@ -105,10 +109,9 @@ function ExchangeRates() {
                   onClick={() => {
                     setInputsActive("active");
                   }}
-                  style={{ zIndex: "100" }}
                 />
 
-                <label className={inputsActive} style={{ zIndex: "1" }}>
+                <label htmlFor="target" className={inputsActive}>
                   {financialUtils.titleCase(rates[currency].currency) +
                     " " +
                     `(${rates[currency].code})`.toUpperCase()}

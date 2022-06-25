@@ -13,9 +13,9 @@ export default function Userinfo(prop) {
   }, []);
 
   return (
-    <div className="row">
+    <div className="row ">
       <div className="col s12 m6">
-        <div className="card blue-grey darken-1">
+        <div className="card hoverable z-depth-3 blue-grey darken-1">
           <div className="card-content white-text">
             <span className="card-title">{prop.name}</span>
             <p>{prop.status}</p>
