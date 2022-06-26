@@ -61,6 +61,7 @@ function ExchangeRates() {
         <div className="z-depth-3 hoverable card blue-grey darken-1">
           <div className="card-content white-text">
             <span className="card-title">Peso Exchange Rates</span>
+
             <div className="row" style={{ marginBottom: "0" }}>
               <div className="input-field col s12 m6 white-text center">
                 <input
@@ -118,6 +119,12 @@ function ExchangeRates() {
                 </label>
               </div>
             </div>
+            <p>
+              Current Rate:
+              {financialUtils.numToFinString.format(
+                Math.round((1 / rates[currency].rate) * 100) / 100
+              )}
+            </p>
             <p className="red-text">
               {isWrong ? "Please enter a number." : ""}
             </p>
@@ -147,6 +154,22 @@ function ExchangeRates() {
               }}
             >
               CNY
+            </a>
+            <a
+              href="#"
+              onClick={() => {
+                handleCurrencyChange("eth");
+              }}
+            >
+              ETH
+            </a>
+            <a
+              href="#"
+              onClick={() => {
+                handleCurrencyChange("btc");
+              }}
+            >
+              BTC
             </a>
             <a
               href="#"

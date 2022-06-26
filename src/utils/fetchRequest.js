@@ -6,7 +6,7 @@ export default class FetchRequest {
     return await fetch(this.url).then((data) => data.json());
   }
   async getCurrency(cb) {
-    const currencies = ["usd", "jpy", "cny", "gbp", "aud", "eur"];
+    const currencies = ["usd", "jpy", "cny", "gbp", "aud", "eur", "eth", "btc"];
     this.goFetch().then((allRates) => {
       const finalRates = {};
       currencies.forEach(async (currency) => {
