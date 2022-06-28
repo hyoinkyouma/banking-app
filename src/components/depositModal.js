@@ -9,10 +9,14 @@ function DepositModal(prop) {
     setAmout(Number(event.target.value));
   };
 
-  const changeBalanceDeposit = () => {
-    prop.setBalance(
-      deposit(Number(prop.balance), Number(amount), transactionLogging)
+  const changeBalanceDeposit = async () => {
+    const newBalance = await deposit(
+      Number(prop.currentUser.balance),
+      Number(amount),
+      prop.currentUser.id,
+      transactionLogging
     );
+    prop.setCurrentUser(newBalance);
     setAmout(0);
   };
 
@@ -33,7 +37,9 @@ function DepositModal(prop) {
         <h4 className="h1">Deposit</h4>
         <h5>
           Balance:
-          {financialUtils.numToFinString.format(prop.balance + Number(amount))}
+          {financialUtils.numToFinString.format(
+            prop.currentUser.balance + Number(amount)
+          )}
         </h5>
         <div className="input-field col s6" style={{ marginTop: "2rem" }}>
           <input

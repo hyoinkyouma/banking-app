@@ -3,48 +3,23 @@ import Userinfo from "./components/userinfo";
 import DepositModal from "./components/depositModal";
 import WithdrawModal from "./components/withdrawModal";
 import { useState, useEffect } from "react";
-import financialUtils from "./utils/financialUtils";
 import "./style.css";
 import LoginScreen from "./components/loginscreen";
 import ExchangeRates from "./components/ExchangeRates";
 
 function App() {
-  const [balance, setStateBalance] = useState(0);
   const [isLoggedIn, setLogin] = useState(false);
   const [userId, setUserId] = useState(1);
-
-  const checkIfLoggedIn = () => {
-    const currentUser = window.localStorage.getItem("currentUser");
-    if (currentUser !== null) {
-      setUserId(Number(currentUser));
-      setStateBalance(user[currentUser].balance);
-      setLogin(true);
-    }
-  };
-
-  useEffect(() => {
-    checkIfLoggedIn();
-  }, [isLoggedIn]);
-
-  const user = [
-    {
-      name: "Roman Cabalum",
-      status: "Savings Account",
-      balance: 57000,
-    },
-    {
-      name: "Piolo Pascual",
-      status: "Active Account",
-      balance: 10000000000,
-    },
-    { name: "Rene Cabalum", status: "Savings Account", balance: 20000 },
-  ];
-
-  const registeredUsers = [
-    { email: "roman.cabalum@gmail.com", password: "1234", id: 0 },
-    { email: "papaP@gmail.com", password: "1234", id: 1 },
-    { email: "renren@gmail.com", password: "1234", id: 2 },
-  ];
+  const [currentUser, setCurrentUser] = useState({
+    _id: "",
+    name: "",
+    email: "",
+    balance: 0,
+    accountNumber: "",
+    accountType: "",
+    accountId: 0,
+    __v: 0,
+  });
 
   if (isLoggedIn === true) {
     return (
@@ -55,23 +30,15 @@ function App() {
           setUserId={setUserId}
           showLogout={true}
         />
-        <Userinfo
-          name={user[userId].name}
-          status={user[userId].status}
-          balanceStr={financialUtils.numToFinString.format(balance)}
-          balance={balance}
-          setBalance={setStateBalance}
-        />
+        <Userinfo currentUser={currentUser} />
         <ExchangeRates />
         <DepositModal
-          balance={balance}
-          balanceStr={financialUtils.numToFinString.format(balance)}
-          setBalance={setStateBalance}
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
         />
         <WithdrawModal
-          balance={balance}
-          balanceStr={financialUtils.numToFinString.format(balance)}
-          setBalance={setStateBalance}
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
         />
       </>
     );
@@ -86,10 +53,8 @@ function App() {
         />
         <LoginScreen
           setLogin={setLogin}
-          registeredUsers={registeredUsers}
+          setCurrentUser={setCurrentUser}
           setUserId={setUserId}
-          regUser={user}
-          setBalance={setStateBalance}
         />
       </>
     );

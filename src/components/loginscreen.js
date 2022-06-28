@@ -1,4 +1,5 @@
 import { useState } from "react";
+import login from "../utils/loginByCreds";
 
 function LoginScreen(prop) {
   const [inputEmail, setInputEmail] = useState("");
@@ -14,18 +15,10 @@ function LoginScreen(prop) {
     setIsIncorrect(false);
   };
 
-  const handleLogin = () => {
-    prop.registeredUsers.forEach((user) => {
-      if (user.email === inputEmail && user.password === inputPassword) {
-        prop.setUserId(user.id);
-        saveUser(user.id);
-        prop.setBalance(prop.regUser[user.id].balance);
-        prop.setLogin(true);
-        console.log(prop.regUser[user.id].balance);
-      } else {
-        setIsIncorrect(true);
-      }
-    });
+  const handleLogin = async () => {
+    const currentUser = await login(inputEmail, inputPassword);
+    prop.setCurrentUser(currentUser);
+    prop.setLogin(true);
   };
 
   const saveUser = (user) => {
