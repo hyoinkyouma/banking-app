@@ -64,6 +64,7 @@ export default function Nav(props) {
               display: props.showLogout === true ? "" : "none",
             }}
             onClick={logout}
+            className="sidenav-close"
           >
             Logout
           </a>

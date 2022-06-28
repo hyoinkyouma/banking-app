@@ -22,7 +22,7 @@ export default function Userinfo(prop) {
             <p>{prop.currentUser.accountType}</p>
             <p>{prop.currentUser.accountNumber}</p>
             <p>
-              Current Balance:
+              Current Balance:{" "}
               {financialUtils.numToFinString.format(prop.currentUser.balance)}
             </p>
           </div>

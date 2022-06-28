@@ -1,6 +1,9 @@
-export default async function (id) {
-  return await fetch("http://localhost:3001/exchangeRate", {
+export default async function (id, cb) {
+  return await fetch("http://localhost:3001/loginUserById", {
     method: "POST",
-    body: { id: id },
-  });
+    body: JSON.stringify({ id: id }),
+    headers: { "Content-type": "application/json" },
+  })
+    .then((data) => data.json())
+    .then((dataJSON) => cb(dataJSON));
 }

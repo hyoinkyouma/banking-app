@@ -4,25 +4,27 @@ import login from "../utils/loginByCreds";
 function LoginScreen(prop) {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
-  const [isIncorrect, setIsIncorrect] = useState(false);
+  const [isIncorrectPass, setIsIncorrectPass] = useState(false);
+  const [isIncorrectEmail, setIsIncorrectEmail] = useState(false);
 
   const handleInputPass = (event) => {
     setInputPassword(event.target.value);
-    setIsIncorrect(false);
+    setIsIncorrectPass(false);
+    setIsIncorrectEmail(false);
   };
   const handleInputEmail = (event) => {
     setInputEmail(event.target.value);
-    setIsIncorrect(false);
+    setIsIncorrectPass(false);
+    setIsIncorrectEmail(false);
   };
 
   const handleLogin = async () => {
     const currentUser = await login(inputEmail, inputPassword);
+    if (currentUser === "Incorrect Password") return setIsIncorrectPass(true);
+    if (currentUser === "Incorrect Email") return setIsIncorrectEmail(true);
     prop.setCurrentUser(currentUser);
     prop.setLogin(true);
-  };
-
-  const saveUser = (user) => {
-    window.localStorage.setItem("currentUser", user);
+    window.localStorage.setItem("currentUser", currentUser._id);
   };
 
   const handleEnter = (e) => {
@@ -65,7 +67,10 @@ function LoginScreen(prop) {
               <br />
               <div className="html-field center">
                 <p className="red-text">
-                  {isIncorrect ? `Email or password is incorrect` : ""}
+                  {isIncorrectEmail
+                    ? `Email is incorrect or does not exist`
+                    : ""}
+                  {isIncorrectPass ? `Password is incorrect` : ""}
                 </p>
                 <br />
                 <button

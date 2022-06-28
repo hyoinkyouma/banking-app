@@ -5,6 +5,7 @@ import WithdrawModal from "./components/withdrawModal";
 import { useState, useEffect } from "react";
 import "./style.css";
 import LoginScreen from "./components/loginscreen";
+import loginById from "./utils/loginById";
 import ExchangeRates from "./components/ExchangeRates";
 
 function App() {
@@ -20,6 +21,21 @@ function App() {
     accountId: 0,
     __v: 0,
   });
+
+  useEffect(() => {
+    if (window.localStorage.getItem("currentUser")) {
+      const login = async () => {
+        return await loginById(
+          window.localStorage.getItem("currentUser"),
+          (data) => {
+            setCurrentUser(data);
+            setLogin(true);
+          }
+        );
+      };
+      login();
+    }
+  }, []);
 
   if (isLoggedIn === true) {
     return (
