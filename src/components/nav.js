@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
+import navBackground from "./pexels-pixabay-534216.jpg";
 
 export default function Nav(props) {
   useEffect(() => {
@@ -28,7 +29,11 @@ export default function Nav(props) {
           <a href="#!" className="brand-logo center">
             Di pako sure ano name
           </a>
-          <a href="#" data-target="slide-out" className="sidenav-trigger">
+          <a
+            href="#"
+            data-target="slide-out"
+            className={props.isLoggedIn === true ? "sidenav-trigger" : "hide"}
+          >
             <i className="material-icons">menu</i>
           </a>
 
@@ -48,14 +53,22 @@ export default function Nav(props) {
             >
               Logout
             </button>
-            <button className="btn waves-effect">Settings</button>
           </div>
         </div>
       </nav>
-
       <ul id="slide-out" className="sidenav">
         <li>
-          <a href="#">Settings</a>
+          <div class="user-view">
+            <div class="background">
+              <img src={navBackground} />
+            </div>
+            <a href="#name">
+              <span class="white-text name">{props.currentUser.name}</span>
+            </a>
+            <a href="#email">
+              <span class="white-text email">{props.currentUser.email}</span>
+            </a>
+          </div>
         </li>
         <li>
           <a

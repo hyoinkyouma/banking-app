@@ -19,12 +19,13 @@ function LoginScreen(prop) {
   };
 
   const handleLogin = async () => {
-    const currentUser = await login(inputEmail, inputPassword);
-    if (currentUser === "Incorrect Password") return setIsIncorrectPass(true);
-    if (currentUser === "Incorrect Email") return setIsIncorrectEmail(true);
-    prop.setCurrentUser(currentUser);
-    prop.setLogin(true);
-    window.localStorage.setItem("currentUser", currentUser._id);
+    await login(inputEmail, inputPassword).then((data) => {
+      if (data === "Incorrect Password") return setIsIncorrectPass(true);
+      if (data === "Incorrect Email") return setIsIncorrectEmail(true);
+      prop.setCurrentUser(data);
+      prop.setLogin(true);
+      window.localStorage.setItem("currentUser", data._id);
+    });
   };
 
   const handleEnter = (e) => {
@@ -74,10 +75,21 @@ function LoginScreen(prop) {
                 </p>
                 <br />
                 <button
-                  className="btn btn-login btn-large waves-effect blue-grey darken-1 waves-dark"
+                  className="btn btn-login  waves-effect blue-grey darken-1 waves-dark"
                   onClick={handleLogin}
+                  style={{ marginBottom: "1rem", width: "8rem" }}
                 >
                   Login
+                </button>
+                <br />
+                <button
+                  style={{ width: "8rem" }}
+                  className="btn btn-register  waves-effect blue-grey darken-1 waves-dark"
+                  onClick={() => {
+                    window.location.replace("http://localhost:3001/newUser");
+                  }}
+                >
+                  Register
                 </button>
               </div>
               <br />

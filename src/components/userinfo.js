@@ -12,6 +12,10 @@ export default function Userinfo(prop) {
     let modal = document.querySelector(".modalWithdraw");
     M.Modal.init(modal, {});
   }, []);
+  useEffect(() => {
+    let modal = document.querySelector(".modalBills");
+    M.Modal.init(modal, {});
+  }, []);
 
   return (
     <div className="row ">
@@ -32,6 +36,9 @@ export default function Userinfo(prop) {
             </a>
             <a href="#withdrawModal" className="modal-trigger">
               Withdraw
+            </a>
+            <a href="#billsModal" className="modal-trigger">
+              Bills Payment
             </a>
           </div>
         </div>

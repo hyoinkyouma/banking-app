@@ -21,6 +21,16 @@ const deposit = async (balance, amount, id, transactionLogging) => {
   return current;
 };
 
+const billsPayment = async (msg, balance, amount, id, transactionLogging) => {
+  const current = await fetch("http://localhost:3001/deposit", {
+    method: "POST",
+    body: JSON.stringify({ amount: Number(balance) - Number(amount), id: id }),
+    headers: { "Content-type": "application/json" },
+  }).then((data) => data.json());
+  transactionLogging(msg, balance, amount, current.balance);
+  return current;
+};
+
 const transactionLogging = (transType, balance, amount, current) => {
   console.log(
     `${transType} ${amount}. Previous balance ${balance}. Now ${current}`
@@ -30,4 +40,4 @@ const transactionLogging = (transType, balance, amount, current) => {
   });
 };
 
-export { withdraw, deposit, transactionLogging };
+export { withdraw, deposit, billsPayment, transactionLogging };

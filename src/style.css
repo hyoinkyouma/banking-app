@@ -13,5 +13,11 @@ input[type="number"] {
   top: 10% !important;
   right: auto !important;
   bottom: auto !important;
-  left: 35% !important;
+  right: 20% !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .exchange-rate-options {
+    overflow-x: scroll;
+  }
 }

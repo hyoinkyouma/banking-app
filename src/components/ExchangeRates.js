@@ -130,7 +130,7 @@ function ExchangeRates() {
             </p>
           </div>
 
-          <div className="card-action" style={{ overflowX: "scroll" }}>
+          <div className="card-action exchange-rate-options">
             <a
               href="#"
               onClick={() => {

@@ -7,6 +7,8 @@ import "./style.css";
 import LoginScreen from "./components/loginscreen";
 import loginById from "./utils/loginById";
 import ExchangeRates from "./components/ExchangeRates";
+import BillsModal from "./components/billsPaymentModal";
+import TransactionRecords from "./components/TransactionRecords";
 
 function App() {
   const [isLoggedIn, setLogin] = useState(false);
@@ -44,10 +46,12 @@ function App() {
           isLoggedIn={isLoggedIn}
           setLogin={setLogin}
           setUserId={setUserId}
+          currentUser={currentUser}
           showLogout={true}
         />
         <Userinfo currentUser={currentUser} />
         <ExchangeRates />
+        <TransactionRecords currentUser={currentUser} />
         <DepositModal
           currentUser={currentUser}
           setCurrentUser={setCurrentUser}
@@ -56,6 +60,7 @@ function App() {
           currentUser={currentUser}
           setCurrentUser={setCurrentUser}
         />
+        <BillsModal currentUser={currentUser} setCurrentUser={setCurrentUser} />
       </>
     );
   } else {
@@ -66,6 +71,7 @@ function App() {
           setLogin={setLogin}
           setUserId={setUserId}
           showLogout={false}
+          currentUser={currentUser}
         />
         <LoginScreen
           setLogin={setLogin}
