@@ -55,22 +55,20 @@ export default function TransactionRecords(prop) {
       <div className="card hoverable z-depth-3 blue-grey darken-1">
         <div className="card-content white-text">
           <span className="card-title white-text">Transaction Records</span>
-          <CustomScroller>
-            <div style={{ width: "100%", height: "30vh" }}>
-              <table>
-                <thead>
-                  <tr>
-                    <th className="center">Type</th>
-                    <th className="center">Date</th>
-                    <th className="center">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <Records />
-                </tbody>
-              </table>
-            </div>
-          </CustomScroller>
+          <div style={{ width: "100%", height: "30vh", overflowY: "scroll" }}>
+            <table>
+              <thead>
+                <tr>
+                  <th className="center">Type</th>
+                  <th className="center">Date</th>
+                  <th className="center">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <Records />
+              </tbody>
+            </table>
+          </div>
         </div>
         <div className="card-action">
           <a href="#clearModal" className="modal-trigger">

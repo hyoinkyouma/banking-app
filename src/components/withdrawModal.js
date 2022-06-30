@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { transactionLogging, withdraw } from "../utils/changeBalance";
 import financialUtils from "../utils/financialUtils";
-import M from "materialize-css/dist/js/materialize.min.js";
+//import M from "materialize-css/dist/js/materialize.min.js";
 
 function WithdrawModal(prop) {
   const [amount, setAmout] = useState(0);

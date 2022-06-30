@@ -57,10 +57,10 @@ export default function News(prop) {
     <div className="col s12 m6">
       <div className="card hoverable z-depth-3 blue-grey darken-1">
         <div className="card-content white-text">
-          <h2 style={{ marginTop: "0" }}>News</h2>
+          <h3 style={{ marginTop: "0" }}>News</h3>
           {!isLoading ? (
             <CustomScroller>
-              <div style={{ height: "70vh" }}>
+              <div style={{ height: "50vh" }}>
                 <Articles articles={articles} />
               </div>
             </CustomScroller>

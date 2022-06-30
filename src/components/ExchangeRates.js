@@ -72,7 +72,7 @@ function ExchangeRates() {
                   Number(phpInput) === 0 ? "" : Math.round(phpInput * 100) / 100
                 }
                 onChange={(e) => {
-                  if (!Number(e.target.value) && e.target.value != 0) {
+                  if (!Number(e.target.value) && e.target.value !== 0) {
                     setIsWrong(true);
                   } else {
                     setPhpInput(e.target.value);
@@ -97,7 +97,7 @@ function ExchangeRates() {
                   targetInput === 0 ? "" : Math.round(targetInput * 100) / 100
                 }
                 onChange={(e) => {
-                  if (!Number(e.target.value) && e.target.value != 0) {
+                  if (!Number(e.target.value) && e.target.value !== 0) {
                     setIsWrong(true);
                   } else {
                     setTargetInput(e.target.value);

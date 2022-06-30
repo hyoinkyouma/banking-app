@@ -18,9 +18,7 @@ input[type="number"] {
   grid-template-rows: 1fr;
   gap: 1rem;
 }
-.card {
-  width: 100%;
-}
+
 .row {
   padding: 0 !important;
   margin: 0 !important;
