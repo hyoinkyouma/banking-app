@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import financialUtils from "../utils/financialUtils";
+import CustomScroller from "react-custom-scroller";
 
 export default function Userinfo(prop) {
   useEffect(() => {
@@ -18,19 +19,19 @@ export default function Userinfo(prop) {
   }, []);
 
   return (
-    <div className="row ">
-      <div className="col s12 m6">
-        <div className="card hoverable z-depth-3 blue-grey darken-1">
-          <div className="card-content white-text">
-            <span className="card-title">{prop.currentUser.name}</span>
-            <p>{prop.currentUser.accountType}</p>
-            <p>{prop.currentUser.accountNumber}</p>
-            <p>
-              Current Balance:{" "}
-              {financialUtils.numToFinString.format(prop.currentUser.balance)}
-            </p>
-          </div>
-          <div className="card-action">
+    <div className="col s12 m6 l6">
+      <div className="card hoverable z-depth-3 blue-grey darken-1">
+        <div className="card-content white-text">
+          <span className="card-title">{prop.currentUser.name}</span>
+          <p>{prop.currentUser.accountType}</p>
+          <p>{prop.currentUser.accountNumber}</p>
+          <p>
+            Current Balance:
+            {financialUtils.numToFinString.format(prop.currentUser.balance)}
+          </p>
+        </div>
+        <CustomScroller>
+          <div className="card-action exchange-rate-options">
             <a href="#depositModal" className="modal-trigger">
               Deposit
             </a>
@@ -38,10 +39,10 @@ export default function Userinfo(prop) {
               Withdraw
             </a>
             <a href="#billsModal" className="modal-trigger">
-              Bills Payment
+              Bills
             </a>
           </div>
-        </div>
+        </CustomScroller>
       </div>
     </div>
   );

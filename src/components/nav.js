@@ -58,15 +58,17 @@ export default function Nav(props) {
       </nav>
       <ul id="slide-out" className="sidenav">
         <li>
-          <div class="user-view">
-            <div class="background">
+          <div className="user-view">
+            <div className="background">
               <img src={navBackground} />
             </div>
             <a href="#name">
-              <span class="white-text name">{props.currentUser.name}</span>
+              <span className="white-text name">{props.currentUser.name}</span>
             </a>
             <a href="#email">
-              <span class="white-text email">{props.currentUser.email}</span>
+              <span className="white-text email">
+                {props.currentUser.email}
+              </span>
             </a>
           </div>
         </li>

@@ -7,7 +7,7 @@ const withdraw = async (balance, amount, id, transactionLogging) => {
     body: JSON.stringify({ amount: Number(balance) - Number(amount), id: id }),
     headers: { "Content-type": "application/json" },
   }).then((data) => data.json());
-  transactionLogging("Withdrew", balance, amount, current.balance);
+  transactionLogging("Withdrew", balance, amount, current);
   return current;
 };
 
@@ -17,7 +17,7 @@ const deposit = async (balance, amount, id, transactionLogging) => {
     body: JSON.stringify({ amount: Number(balance) + Number(amount), id: id }),
     headers: { "Content-type": "application/json" },
   }).then((data) => data.json());
-  transactionLogging("Deposited", balance, amount, current.balance);
+  transactionLogging("Deposited", balance, amount, current);
   return current;
 };
 
@@ -27,14 +27,21 @@ const billsPayment = async (msg, balance, amount, id, transactionLogging) => {
     body: JSON.stringify({ amount: Number(balance) - Number(amount), id: id }),
     headers: { "Content-type": "application/json" },
   }).then((data) => data.json());
-  transactionLogging(msg, balance, amount, current.balance);
+  transactionLogging(msg, balance, amount, current);
   return current;
 };
 
-const transactionLogging = (transType, balance, amount, current) => {
-  console.log(
-    `${transType} ${amount}. Previous balance ${balance}. Now ${current}`
-  );
+const transactionLogging = async (transType, balance, amount, current) => {
+  const res = await fetch("http://localhost:3001/logTransaction", {
+    method: "post",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({
+      amount: amount,
+      type: transType,
+      userId: current._id,
+    }),
+  });
+  console.log(await res.json());
   M.toast({
     html: `${transType} ${financialUtils.numToFinString.format(amount)}.`,
   });

@@ -9,6 +9,22 @@ input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
 
+.main-container {
+  padding: 0 1rem;
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1rem;
+}
+.card {
+  width: 100%;
+}
+.row {
+  padding: 0 !important;
+  margin: 0 !important;
+}
 #toast-container {
   top: 10% !important;
   right: auto !important;
@@ -17,7 +33,14 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 600px) {
-  .exchange-rate-options {
-    overflow-x: scroll;
+  .col {
+    width: 94vw;
+  }
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+  .news-container {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
   }
 }

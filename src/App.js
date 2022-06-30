@@ -9,6 +9,7 @@ import loginById from "./utils/loginById";
 import ExchangeRates from "./components/ExchangeRates";
 import BillsModal from "./components/billsPaymentModal";
 import TransactionRecords from "./components/TransactionRecords";
+import News from "./components/news";
 
 function App() {
   const [isLoggedIn, setLogin] = useState(false);
@@ -25,7 +26,26 @@ function App() {
   });
 
   useEffect(() => {
-    if (window.localStorage.getItem("currentUser")) {
+    const params = new URL(document.location).searchParams;
+    const idParams = params.get("Acc");
+    if (idParams !== null) {
+      const login = async () => {
+        return await loginById(idParams, (data) => {
+          window.localStorage.setItem("currentUser", data._id);
+          setCurrentUser(data);
+          setLogin(true);
+          window.history.pushState(
+            "object or string",
+            "Title",
+            "/" +
+              window.location.href
+                .substring(window.location.href.lastIndexOf("/") + 1)
+                .split("?")[0]
+          );
+        });
+      };
+      login();
+    } else if (window.localStorage.getItem("currentUser")) {
       const login = async () => {
         return await loginById(
           window.localStorage.getItem("currentUser"),
@@ -49,9 +69,16 @@ function App() {
           currentUser={currentUser}
           showLogout={true}
         />
-        <Userinfo currentUser={currentUser} />
-        <ExchangeRates />
-        <TransactionRecords currentUser={currentUser} />
+        <div className="main-container">
+          <div>
+            <Userinfo currentUser={currentUser} />
+            <ExchangeRates />
+            <TransactionRecords currentUser={currentUser} />
+          </div>
+          <div>
+            <News />
+          </div>
+        </div>
         <DepositModal
           currentUser={currentUser}
           setCurrentUser={setCurrentUser}

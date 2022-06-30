@@ -33,6 +33,7 @@ function BillsModal(prop) {
   };
   const handleEnterKey = (e) => {
     if (e.key === "Enter") {
+      if (amount === 0) return;
       const submit = document.querySelectorAll(".modal-close");
       submit[2].click();
     }

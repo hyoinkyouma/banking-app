@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FetchRequest from "../utils/fetchRequest";
 import financialUtils from "../utils/financialUtils";
+import CustomScroller from "react-custom-scroller";
 
 function ExchangeRates() {
   const [currency, setCurrency] = useState("usd");
@@ -56,80 +57,76 @@ function ExchangeRates() {
     }
   }, [currency]);
   return (
-    <div className="row">
-      <div className="col s12 m6">
-        <div className="z-depth-3 hoverable card blue-grey darken-1">
-          <div className="card-content white-text">
-            <span className="card-title">Peso Exchange Rates</span>
+    <div className="col s12 m6">
+      <div className="z-depth-3 hoverable card blue-grey darken-1">
+        <div className="card-content white-text">
+          <span className="card-title">Peso Exchange Rates</span>
 
-            <div className="row" style={{ marginBottom: "0" }}>
-              <div className="input-field col s12 m6 white-text center">
-                <input
-                  id="peso"
-                  type="text"
-                  className="validate white-text"
-                  value={
-                    Number(phpInput) === 0
-                      ? ""
-                      : Math.round(phpInput * 100) / 100
+          <div className="row" style={{ marginBottom: "0" }}>
+            <div className="input-field col s12 m6 white-text center">
+              <input
+                id="peso"
+                type="text"
+                className="validate white-text"
+                value={
+                  Number(phpInput) === 0 ? "" : Math.round(phpInput * 100) / 100
+                }
+                onChange={(e) => {
+                  if (!Number(e.target.value) && e.target.value != 0) {
+                    setIsWrong(true);
+                  } else {
+                    setPhpInput(e.target.value);
+                    setTargetInput(e.target.value * rates[currency].rate);
+                    setIsWrong(false);
                   }
-                  onChange={(e) => {
-                    if (!Number(e.target.value) && e.target.value != 0) {
-                      setIsWrong(true);
-                    } else {
-                      setPhpInput(e.target.value);
-                      setTargetInput(e.target.value * rates[currency].rate);
-                      setIsWrong(false);
-                    }
-                  }}
-                  onClick={() => {
-                    setInputsActive("active");
-                  }}
-                />
-                <label htmlFor="peso" className={inputsActive}>
-                  Philippine Peso (PHP)
-                </label>
-              </div>
-              <div className="input-field col s12 m6 white-text center">
-                <input
-                  id="target"
-                  type="text"
-                  className="validate white-text"
-                  value={
-                    targetInput === 0 ? "" : Math.round(targetInput * 100) / 100
-                  }
-                  onChange={(e) => {
-                    if (!Number(e.target.value) && e.target.value != 0) {
-                      setIsWrong(true);
-                    } else {
-                      setTargetInput(e.target.value);
-                      setPhpInput(e.target.value / rates[currency].rate);
-                      setIsWrong(false);
-                    }
-                  }}
-                  onClick={() => {
-                    setInputsActive("active");
-                  }}
-                />
-
-                <label htmlFor="target" className={inputsActive}>
-                  {financialUtils.titleCase(rates[currency].currency) +
-                    " " +
-                    `(${rates[currency].code})`.toUpperCase()}
-                </label>
-              </div>
+                }}
+                onClick={() => {
+                  setInputsActive("active");
+                }}
+              />
+              <label htmlFor="peso" className={inputsActive}>
+                Philippine Peso (PHP)
+              </label>
             </div>
-            <p>
-              Current Rate:
-              {financialUtils.numToFinString.format(
-                Math.round((1 / rates[currency].rate) * 100) / 100
-              )}
-            </p>
-            <p className="red-text">
-              {isWrong ? "Please enter a number." : ""}
-            </p>
-          </div>
+            <div className="input-field col s12 m6 white-text center">
+              <input
+                id="target"
+                type="text"
+                className="validate white-text"
+                value={
+                  targetInput === 0 ? "" : Math.round(targetInput * 100) / 100
+                }
+                onChange={(e) => {
+                  if (!Number(e.target.value) && e.target.value != 0) {
+                    setIsWrong(true);
+                  } else {
+                    setTargetInput(e.target.value);
+                    setPhpInput(e.target.value / rates[currency].rate);
+                    setIsWrong(false);
+                  }
+                }}
+                onClick={() => {
+                  setInputsActive("active");
+                }}
+              />
 
+              <label htmlFor="target" className={inputsActive}>
+                {financialUtils.titleCase(rates[currency].currency) +
+                  " " +
+                  `(${rates[currency].code})`.toUpperCase()}
+              </label>
+            </div>
+          </div>
+          <p style={{ paddingLeft: "1rem" }}>
+            Current Rate:
+            {financialUtils.numToFinString.format(
+              Math.round((1 / rates[currency].rate) * 100) / 100
+            )}
+          </p>
+          <p className="red-text">{isWrong ? "Please enter a number." : ""}</p>
+        </div>
+
+        <CustomScroller>
           <div className="card-action exchange-rate-options">
             <a
               href="#"
@@ -196,7 +193,7 @@ function ExchangeRates() {
               EUR
             </a>
           </div>
-        </div>
+        </CustomScroller>
       </div>
     </div>
   );
