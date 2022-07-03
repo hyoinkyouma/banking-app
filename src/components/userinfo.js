@@ -26,9 +26,7 @@ export default function Userinfo(prop) {
     <div className="col s12 m6 l6">
       <div className="card hoverable z-depth-3 blue-grey darken-1">
         <div className="card-content white-text">
-          <span className="card-title">
-            {financialUtils.titleCase(prop.currentUser.name)}
-          </span>
+          <span className="card-title">{prop.currentUser.name}</span>
           <p>{prop.currentUser.accountType}</p>
           <p>{prop.currentUser.accountNumber}</p>
           <p>

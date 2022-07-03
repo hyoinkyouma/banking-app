@@ -9,6 +9,10 @@ input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
 
+body {
+  zoom: 80%;
+}
+
 .main-container {
   padding: 0 2rem;
   width: 100%;
