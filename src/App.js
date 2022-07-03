@@ -13,8 +13,6 @@ import News from "./components/news";
 import { Budget } from "./components/Budget";
 import TransferModal from "./components/Transfer";
 
-const isDev = false;
-
 function App() {
   const [isLoggedIn, setLogin] = useState(false);
   const [currentUser, setCurrentUser] = useState({

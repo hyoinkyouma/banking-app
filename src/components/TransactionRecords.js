@@ -16,6 +16,7 @@ export default function TransactionRecords(prop) {
         .then((jsonData) => setTransactionArr(jsonData));
     };
     getRecords();
+    console.log(transactionArr);
   }, [prop.currentUser]);
 
   const Records = () => {

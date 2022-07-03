@@ -1,19 +1,20 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import financialUtils from "../utils/financialUtils";
+import { transactionLogging, transfer } from "../utils/changeBalance";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 function TransferModal(prop) {
   const recepientRef = useRef();
-  const [amount, setAmout] = useState(0);
+  const [amount, setAmount] = useState("");
   const [accNumInput, setAccNumInput] = useState("");
   const [inputIsHidden, setInputIsHidden] = useState(true);
 
   useEffect(() => {
-    //timeout on local: .5secs
-    const debounceFun: void = setTimeout(async () => {
+    //timeout : .5secs
+    const debounceFun = setTimeout(async () => {
       if (recepientRef.current !== undefined) return;
       if (accNumInput === "") return;
-      //fetch
+      //fetch to ref
       const recepient = await fetch("http://localhost:3001/findUserAccNum", {
         method: "post",
         headers: { "Content-type": "application/json" },
@@ -27,10 +28,33 @@ function TransferModal(prop) {
           setAccNumInput(`${financialUtils.titleCase(resjson.name)}`);
           setInputIsHidden(false);
         });
-    }, 500);
+    }, 1000);
+    return () => clearTimeout(debounceFun);
   }, [accNumInput]);
 
-  const changeBalanceDeposit = async () => {};
+  const transferSubmit = async () => {
+    const senderMsg = `Sent to ${recepientRef.current.name}`;
+    const recMsg = `From ${prop.currentUser.name}`;
+    const balance = prop.currentUser.balance;
+    const id = prop.currentUser._id;
+    const recId = recepientRef.current._id;
+    const senderName = prop.currentUser.name;
+
+    const res = await transfer(
+      senderMsg,
+      recMsg,
+      balance,
+      amount,
+      id,
+      recId,
+      transactionLogging,
+      senderName
+    );
+    prop.setCurrentUser(res);
+    setAmount("");
+    setInputIsHidden(true);
+    setAccNumInput("");
+  };
   return (
     <div
       id="transferModal"
@@ -40,9 +64,9 @@ function TransferModal(prop) {
       <div className="modal-content">
         <h4 className="h1">Transfer</h4>
         <h5>
-          Balance:
+          Balance:{" "}
           {financialUtils.numToFinString.format(
-            prop.currentUser.balance - Number(amount)
+            prop.currentUser.balance - Number(amount.replace(",", ""))
           )}
         </h5>
         <div className="input-field col s6" style={{ marginTop: "2rem" }}>
@@ -51,13 +75,33 @@ function TransferModal(prop) {
             type="text"
             value={accNumInput}
             className="validate"
+            onKeyDown={(e) => {
+              if (
+                e.key === "Backspace" &&
+                e.target.value.charAt(e.target.value.length - 1) === "-"
+              ) {
+                setAccNumInput(
+                  e.target.value.substring(0, e.target.value.length - 1)
+                );
+              }
+            }}
             onChange={(e) => {
-              setInputIsHidden(true);
+              if (!e.target.value.match("^[0-9\x08-]*$")) return;
               recepientRef.current = undefined;
-              setAccNumInput(e.target.value);
+              setInputIsHidden(true);
+              setAccNumInput(
+                e.target.value
+                  .replace(/[^\dA-Z]/g, "")
+                  .replace(/(.{4})/g, "$1-")
+                  .trim()
+              );
+              if (e.target.value.length > 17)
+                setAccNumInput(e.target.value.substring(0, 19));
             }}
           />
-          <label htmlFor="recipientId">Recipient Acc. Number</label>
+          <label htmlFor="recipientId">
+            {inputIsHidden ? "Recipient Acc. Number" : "Recipient Name"}
+          </label>
         </div>
         <div
           className={
@@ -67,22 +111,45 @@ function TransferModal(prop) {
           }
         >
           <input
-            id="recipientId"
+            id="accNum"
             type="text"
+            readOnly
             value={
               recepientRef.current === undefined
                 ? ""
                 : recepientRef.current.accountNumber
             }
-            className="validate"
-            onChange={(e) => {
-              recepientRef.current = undefined;
-              setAccNumInput(e.target.value);
-            }}
+            className="validate active"
           />
+          <label className="active">Account Number</label>
         </div>
 
-        <button className="btn modal-close center deposit-modal waves-effect waves-green">
+        <div
+          className={
+            inputIsHidden
+              ? "input-field col s6 scale-transition scale-out"
+              : "input-field col s6 scale-transition scale-in"
+          }
+        >
+          <input
+            id="amount"
+            type="text"
+            value={amount}
+            className="validate"
+            onChange={(e) => {
+              if (e.target.value.match("^[0-9,]*$")) {
+                setAmount(e.target.value);
+              }
+            }}
+          />
+          <label htmlFor="amount">Amount</label>
+        </div>
+
+        <button
+          disabled={inputIsHidden}
+          onClick={transferSubmit}
+          className="btn modal-close deposit-modal "
+        >
           Submit
         </button>
       </div>

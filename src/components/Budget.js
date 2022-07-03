@@ -19,6 +19,8 @@ export const Budget = (props) => {
         transactionLogging
       );
       props.setCurrentUser(await result);
+      setFundsInput(0);
+      setExpenseName("");
     }
   };
 
