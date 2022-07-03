@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import navBackground from "./pexels-pixabay-534216.jpg";
 
@@ -10,7 +10,6 @@ export default function Nav(props) {
 
   const logout = () => {
     props.setLogin(false);
-    props.setUserId(null);
     window.localStorage.clear();
   };
 

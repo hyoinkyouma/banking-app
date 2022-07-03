@@ -10,10 +10,13 @@ import ExchangeRates from "./components/ExchangeRates";
 import BillsModal from "./components/billsPaymentModal";
 import TransactionRecords from "./components/TransactionRecords";
 import News from "./components/news";
+import { Budget } from "./components/Budget";
+import TransferModal from "./components/Transfer";
+
+const isDev = false;
 
 function App() {
   const [isLoggedIn, setLogin] = useState(false);
-  const [userId, setUserId] = useState(1);
   const [currentUser, setCurrentUser] = useState({
     _id: "",
     name: "",
@@ -65,7 +68,6 @@ function App() {
         <Nav
           isLoggedIn={isLoggedIn}
           setLogin={setLogin}
-          setUserId={setUserId}
           currentUser={currentUser}
           showLogout={true}
         />
@@ -77,6 +79,8 @@ function App() {
           </div>
           <div>
             <News />
+
+            <Budget currentUser={currentUser} setCurrentUser={setCurrentUser} />
           </div>
         </div>
         <DepositModal
@@ -88,6 +92,10 @@ function App() {
           setCurrentUser={setCurrentUser}
         />
         <BillsModal currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <TransferModal
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+        />
       </>
     );
   } else {
@@ -96,15 +104,10 @@ function App() {
         <Nav
           isLoggedIn={isLoggedIn}
           setLogin={setLogin}
-          setUserId={setUserId}
           showLogout={false}
           currentUser={currentUser}
         />
-        <LoginScreen
-          setLogin={setLogin}
-          setCurrentUser={setCurrentUser}
-          setUserId={setUserId}
-        />
+        <LoginScreen setLogin={setLogin} setCurrentUser={setCurrentUser} />
       </>
     );
   }

@@ -60,7 +60,7 @@ export default function News(prop) {
           <h3 style={{ marginTop: "0" }}>News</h3>
           {!isLoading ? (
             <CustomScroller>
-              <div style={{ height: "50vh" }}>
+              <div style={{ height: "40vh" }}>
                 <Articles articles={articles} />
               </div>
             </CustomScroller>

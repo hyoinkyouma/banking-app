@@ -10,13 +10,15 @@ input[type="number"] {
 }
 
 .main-container {
-  padding: 0 1rem;
+  padding: 0 2rem;
   width: 100%;
   margin: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  gap: 1rem;
+  gap: 3rem;
+  overflow: hidden;
+  justify-content: center;
 }
 
 .row {
@@ -29,13 +31,42 @@ input[type="number"] {
   bottom: auto !important;
   right: 20% !important;
 }
+.scale-out {
+  height: 0vh;
+}
 
 @media only screen and (max-width: 600px) {
+  #toast-container {
+    top: auto !important;
+    right: auto !important;
+    bottom: 0 !important;
+    left: auto !important;
+  }
   .col {
     width: 94vw;
   }
   .main-container {
     grid-template-columns: 1fr;
+    justify-content: center;
+    gap: 0;
+  }
+  .modal {
+    width: 80% !important;
+    padding: 0.1rem !important;
+    overflow: hidden;
+  }
+  .modal input {
+    width: 70% !important;
+  }
+  .modal button {
+    margin-left: 60% !important;
+  }
+  .exchange-rate-options {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 1rem !important;
   }
   .news-container {
     grid-template-columns: 1fr !important;

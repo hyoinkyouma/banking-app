@@ -5,6 +5,10 @@ import CustomScroller from "react-custom-scroller";
 
 export default function Userinfo(prop) {
   useEffect(() => {
+    let modal = document.querySelector(".modalTransfer");
+    M.Modal.init(modal, {});
+  }, []);
+  useEffect(() => {
     let modal = document.querySelector(".modalDeposit");
     M.Modal.init(modal, {});
   }, []);
@@ -37,6 +41,9 @@ export default function Userinfo(prop) {
             </a>
             <a href="#withdrawModal" className="modal-trigger">
               Withdraw
+            </a>
+            <a href="#transferModal" className="modal-trigger">
+              Transfer
             </a>
             <a href="#billsModal" className="modal-trigger">
               Bills

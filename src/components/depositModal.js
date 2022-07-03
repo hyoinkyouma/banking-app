@@ -8,6 +8,7 @@ function DepositModal(prop) {
 
   const handleInput = (event) => {
     if (!Number(event.target.value) && event.target.value === 0) return;
+    if (event.target.value.length > 7) return;
     setAmout(Number(event.target.value));
   };
 

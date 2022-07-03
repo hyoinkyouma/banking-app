@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import M from "materialize-css/dist/js/materialize.min.js";
 import financialUtils from "../utils/financialUtils";
 import CustomScroller from "react-custom-scroller";
 
@@ -19,12 +18,8 @@ export default function TransactionRecords(prop) {
     getRecords();
   }, [prop.currentUser]);
 
-  useEffect(() => {
-    let modal = document.getElementById("clearModal");
-    M.Modal.init(modal, {});
-  }, []);
-
   const Records = () => {
+    if (transactionArr.transactions === null) return;
     const arr = [];
     let x = 0;
     transactionArr.transactions.forEach((trans) => {
@@ -50,8 +45,20 @@ export default function TransactionRecords(prop) {
     return arr.reverse();
   };
 
+  const clearTransactions = async () => {
+    const response = await fetch("http://localhost:3001/delRecords", {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ id: prop.currentUser._id }),
+    }).then((data) => {
+      const jsonRes = data.json();
+      console.log(jsonRes);
+      setTransactionArr({ transactions: null });
+    });
+  };
+
   return (
-    <div className="col s12 m6">
+    <div id="transactionModal" className="col s12 m6">
       <div className="card hoverable z-depth-3 blue-grey darken-1">
         <div className="card-content white-text">
           <span className="card-title white-text">Transaction Records</span>
@@ -71,7 +78,7 @@ export default function TransactionRecords(prop) {
           </div>
         </div>
         <div className="card-action">
-          <a href="#clearModal" className="modal-trigger">
+          <a href="#" onClick={clearTransactions}>
             Clear
           </a>
         </div>
