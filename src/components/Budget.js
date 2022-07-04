@@ -1,9 +1,20 @@
-import { useState } from "react";
-import { transactionLogging, billsPayment } from "../utils/changeBalance";
+import { useState, useEffect } from "react";
+import {
+  transactionLogging,
+  billsPayment,
+  budgetLogging,
+} from "../utils/changeBalance";
+import financialUtils from "../utils/financialUtils";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 export const Budget = (props) => {
   const [expenseName, setExpenseName] = useState("");
   const [fundsInput, setFundsInput] = useState(0);
+
+  useEffect(() => {
+    let modal = document.querySelector(".budgetModal");
+    M.Modal.init(modal, {});
+  }, []);
 
   const handleAddExpense = async () => {
     if (expenseName !== "" && fundsInput !== 0) {
@@ -18,6 +29,9 @@ export const Budget = (props) => {
         id,
         transactionLogging
       );
+
+      const logResult = await budgetLogging(msg, id, amount);
+      console.log(logResult);
       props.setCurrentUser(await result);
       setFundsInput(0);
       setExpenseName("");
@@ -37,7 +51,7 @@ export const Budget = (props) => {
               gap: "0",
             }}
           >
-            <h5 className="card-title">Budget</h5>
+            <h5 className="card-title">Expenses</h5>
           </div>
           <div
             className="row center"
@@ -96,7 +110,9 @@ export const Budget = (props) => {
           </div>
         </div>
         <div className="card-action">
-          <a href="#transactionModal">See History</a>
+          <a href="#budgetModal" className="modal-trigger">
+            See History
+          </a>
         </div>
       </div>
     </div>

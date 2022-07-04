@@ -1,4 +1,4 @@
-export default async function (id, cb) {
+export default async function loginById(id, cb) {
   return await fetch("http://localhost:3001/loginUserById", {
     method: "POST",
     body: JSON.stringify({ id: id }),

@@ -1,4 +1,4 @@
-export default class {
+export default class financialUtils {
   constructor(currency) {
     this.currency = currency;
   }

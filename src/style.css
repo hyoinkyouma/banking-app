@@ -40,6 +40,35 @@ body {
 }
 
 @media only screen and (max-width: 900px) {
+  #budgetModal {
+    width: 100vw !important;
+    height: fit-content !important;
+    max-height: 70vh !important;
+  }
+  #budgetModal div {
+    width: 100% !important;
+    justify-items: flex-end;
+  }
+  #budgetModal div input {
+    gap: 0;
+    padding: 0;
+    margin: 0;
+  }
+  #budgetModal div button {
+    width: 150%;
+    gap: 0;
+    padding: 0;
+    margin: 0 auto;
+  }
+  #budgetModal .modal-footer {
+    display: flex;
+    margin-bottom: 2rem;
+  }
+  #budgetModal .modal-footer .btn {
+    width: 40%;
+    margin-left: 30% !important;
+  }
+
   #toast-container {
     top: auto !important;
     right: auto !important;

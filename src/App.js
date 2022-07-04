@@ -12,6 +12,7 @@ import TransactionRecords from "./components/TransactionRecords";
 import News from "./components/news";
 import { Budget } from "./components/Budget";
 import TransferModal from "./components/Transfer";
+import BudgetModal from "./components/BudgetModal";
 
 function App() {
   const [isLoggedIn, setLogin] = useState(false);
@@ -94,6 +95,7 @@ function App() {
           currentUser={currentUser}
           setCurrentUser={setCurrentUser}
         />
+        <BudgetModal currentUser={currentUser} />
       </>
     );
   } else {

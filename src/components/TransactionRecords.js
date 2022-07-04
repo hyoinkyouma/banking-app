@@ -63,7 +63,7 @@ export default function TransactionRecords(prop) {
       <div className="card hoverable z-depth-3 blue-grey darken-1">
         <div className="card-content white-text">
           <span className="card-title white-text">Transaction Records</span>
-          <div style={{ width: "100%", height: "30vh", overflowY: "scroll" }}>
+          <div style={{ width: "100%", height: "22vh", overflowY: "scroll" }}>
             <table>
               <thead>
                 <tr>

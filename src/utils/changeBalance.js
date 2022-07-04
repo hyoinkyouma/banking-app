@@ -59,6 +59,18 @@ const transfer = async (
   return current;
 };
 
+const budgetLogging = async (name, id, amount) => {
+  return await fetch("http://localhost:3001/logBudget", {
+    method: "post",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ amount: amount, id: id, name: name }),
+  })
+    .then((data) => data.json())
+    .catch((e) => {
+      console.log(e.toString());
+    });
+};
+
 const transactionLogging = async (transType, balance, amount, current) => {
   const res = await fetch("http://localhost:3001/logTransaction", {
     method: "post",
@@ -76,4 +88,11 @@ const transactionLogging = async (transType, balance, amount, current) => {
   });
 };
 
-export { withdraw, deposit, billsPayment, transactionLogging, transfer };
+export {
+  withdraw,
+  deposit,
+  billsPayment,
+  transactionLogging,
+  transfer,
+  budgetLogging,
+};

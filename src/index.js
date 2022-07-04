@@ -4,7 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "materialize-css/dist/css/materialize.min.css";
 
-const isDev = false;
+const isDev = true;
 if (!isDev) console.log = function () {};
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
