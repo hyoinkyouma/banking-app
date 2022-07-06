@@ -50,11 +50,12 @@ function App() {
       login();
     } else if (window.localStorage.getItem("currentUser")) {
       const login = async () => {
+        setLogin(true);
+
         return await loginById(
           window.localStorage.getItem("currentUser"),
           (data) => {
             setCurrentUser(data);
-            setLogin(true);
           }
         );
       };
