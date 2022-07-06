@@ -81,8 +81,8 @@ function LoginScreen(prop) {
                 <div className="html-field center">
                   <p className="red-text">
                     {isLoggingIn && (
-                      <div class="progress">
-                        <div class="indeterminate"></div>
+                      <div className="progress">
+                        <div className="indeterminate"></div>
                       </div>
                     )}
                     {isIncorrectEmail

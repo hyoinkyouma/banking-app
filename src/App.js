@@ -102,7 +102,7 @@ function App() {
     );
   } else {
     return (
-      <div style={{ height: "100vh" }}>
+      <div className="login-main">
         <Nav
           isLoggedIn={isLoggedIn}
           setLogin={setLogin}
