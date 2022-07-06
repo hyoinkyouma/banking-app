@@ -6,6 +6,7 @@ function LoginScreen(prop) {
   const [inputPassword, setInputPassword] = useState("");
   const [isIncorrectPass, setIsIncorrectPass] = useState(false);
   const [isIncorrectEmail, setIsIncorrectEmail] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleInputPass = (event) => {
     setInputPassword(event.target.value);
@@ -19,7 +20,9 @@ function LoginScreen(prop) {
   };
 
   const handleLogin = async () => {
+    setIsLoggingIn(true);
     await login(inputEmail, inputPassword).then((data) => {
+      setIsLoggingIn(false);
       if (data === "Incorrect Password") return setIsIncorrectPass(true);
       if (data === "Incorrect Email") return setIsIncorrectEmail(true);
       prop.setCurrentUser(data);
@@ -40,7 +43,7 @@ function LoginScreen(prop) {
       <div
         className="container nav-container "
         style={{
-          height: "80vh",
+          height: "100vh",
           display: "grid",
           gridAutoFlow: "column",
           alignItems: "center",
@@ -77,6 +80,11 @@ function LoginScreen(prop) {
                 <br />
                 <div className="html-field center">
                   <p className="red-text">
+                    {isLoggingIn && (
+                      <div class="progress">
+                        <div class="indeterminate"></div>
+                      </div>
+                    )}
                     {isIncorrectEmail
                       ? `Email is incorrect or does not exist`
                       : ""}

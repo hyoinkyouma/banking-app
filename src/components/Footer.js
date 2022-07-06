@@ -1,21 +1,12 @@
 const Footer = (prop) => {
   return (
     <>
-      <footer
-        className="page-footer blue-grey"
-        style={{ position: prop.posY, bottom: "0", width: "100%" }}
-      >
+      <footer className="page-footer blue-grey">
         <div className="container">
           <div className="row"></div>
         </div>
         <div className="footer-copyright">
-          <div
-            className="container center"
-            style={{
-              display: "grid",
-              gridAutoFlow: "column",
-            }}
-          >
+          <div className="container center">
             © 2014 Copyright
             <a
               className="grey-text text-lighten-4 "

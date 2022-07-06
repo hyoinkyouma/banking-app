@@ -102,7 +102,7 @@ function App() {
     );
   } else {
     return (
-      <>
+      <div style={{ height: "100vh" }}>
         <Nav
           isLoggedIn={isLoggedIn}
           setLogin={setLogin}
@@ -111,7 +111,7 @@ function App() {
         />
         <LoginScreen setLogin={setLogin} setCurrentUser={setCurrentUser} />
         <Footer posY={"absolute"} />
-      </>
+      </div>
     );
   }
 }
