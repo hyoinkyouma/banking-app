@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import financialUtils from "../utils/financialUtils";
 import { transactionLogging, transfer } from "../utils/changeBalance";
-import M from "materialize-css/dist/js/materialize.min.js";
 
 function TransferModal(prop) {
   const recepientRef = useRef();
@@ -15,7 +14,7 @@ function TransferModal(prop) {
       if (recepientRef.current !== undefined) return;
       if (accNumInput === "") return;
       //fetch to ref
-      const recepient = await fetch("http://localhost:3001/findUserAccNum", {
+      await fetch("https://banking-app-avion.herokuapp.com/findUserAccNum", {
         method: "post",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ id: accNumInput }),

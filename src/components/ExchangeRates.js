@@ -52,7 +52,9 @@ function ExchangeRates() {
       setRates(data);
     });
     async function fetcher(cb) {
-      const fetch = new FetchRequest("http://localhost:3001/exchangeRate");
+      const fetch = new FetchRequest(
+        "https://banking-app-avion.herokuapp.com/exchangeRate"
+      );
       fetch.getCurrency((data) => cb(data));
     }
   }, [currency]);

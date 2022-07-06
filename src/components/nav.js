@@ -22,11 +22,9 @@ export default function Nav(props) {
             href="#"
             className="brand-logo left hide-on-med-and-down"
             style={{ marginLeft: "1rem" }}
-          >
-            Logo dito
-          </a>
+          ></a>
           <a href="#!" className="brand-logo center">
-            Di pako sure ano name
+            Bank-App
           </a>
           <a
             href="#"

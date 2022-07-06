@@ -7,7 +7,7 @@ export default function TransactionRecords(prop) {
 
   useEffect(() => {
     const getRecords = async () => {
-      return await fetch("http://localhost:3001/getRecords", {
+      return await fetch("https://banking-app-avion.herokuapp.com/getRecords", {
         method: "post",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ id: prop.currentUser._id }),
@@ -47,11 +47,14 @@ export default function TransactionRecords(prop) {
   };
 
   const clearTransactions = async () => {
-    const response = await fetch("http://localhost:3001/delRecords", {
-      method: "post",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ id: prop.currentUser._id }),
-    }).then((data) => {
+    const response = await fetch(
+      "https://banking-app-avion.herokuapp.com/delRecords",
+      {
+        method: "post",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ id: prop.currentUser._id }),
+      }
+    ).then((data) => {
       const jsonRes = data.json();
       console.log(jsonRes);
       setTransactionArr({ transactions: null });

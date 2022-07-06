@@ -6,7 +6,7 @@ export default function News(prop) {
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     const fetchNews = async (cb) => {
-      return await fetch("http://localhost:3001/news")
+      return await fetch("https://banking-app-avion.herokuapp.com/news")
         .then((data) => data.json())
         .then((dataJSON) => cb(dataJSON))
         .then((stuff) => setLoading(false));

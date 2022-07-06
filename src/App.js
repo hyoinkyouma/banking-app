@@ -13,6 +13,7 @@ import News from "./components/news";
 import { Budget } from "./components/Budget";
 import TransferModal from "./components/Transfer";
 import BudgetModal from "./components/BudgetModal";
+import Footer from "./components/Footer";
 
 function App() {
   const [isLoggedIn, setLogin] = useState(false);
@@ -96,6 +97,7 @@ function App() {
           setCurrentUser={setCurrentUser}
         />
         <BudgetModal currentUser={currentUser} />
+        <Footer />
       </>
     );
   } else {
@@ -108,6 +110,7 @@ function App() {
           currentUser={currentUser}
         />
         <LoginScreen setLogin={setLogin} setCurrentUser={setCurrentUser} />
+        <Footer posY={"absolute"} />
       </>
     );
   }

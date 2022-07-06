@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import financialUtils from "../utils/financialUtils";
+import { Bar } from "react-chartjs-2";
+
+import { Chart, registerables } from "chart.js";
+Chart.register(...registerables);
 
 export default function BudgetModal(prop) {
   // const [userBudget, setUserBudget] = useState(0);
   //const [isChangingBudget, setisChangingBudget] = useState(false);
-  const [transactionArr, setTransactionArr] = useState({ transactions: [] });
 
+  const [transactionArr, setTransactionArr] = useState({ transactions: [] });
+  const [topArr, setTopArr] = useState({ values: [] });
   useEffect(() => {
     const getRecords = async () => {
-      return await fetch("http://localhost:3001/getBudget", {
+      return await fetch("https://banking-app-avion.herokuapp.com/getBudget", {
         method: "post",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ id: prop.currentUser._id }),
@@ -16,8 +21,20 @@ export default function BudgetModal(prop) {
         .then((data) => data.json())
         .then((jsonData) => setTransactionArr(jsonData));
     };
+    const getTopThree = async () => {
+      return await fetch(
+        "https://banking-app-avion.herokuapp.com/getBudgetChart",
+        {
+          method: "post",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({ id: prop.currentUser._id }),
+        }
+      )
+        .then((datathre) => datathre.json())
+        .then((jsondatathre) => setTopArr(jsondatathre));
+    };
+    getTopThree();
     getRecords();
-    console.log(transactionArr);
     // const budgetAmount = JSON.parse(
     //   window.localStorage.getItem("budgetAmount")
     // );
@@ -63,6 +80,45 @@ export default function BudgetModal(prop) {
         <div style={{ width: "25%", padding: "1rem" }}>
           <h4>Expenses</h4>
         </div>
+        {topArr.values.length >= 3 && (
+          <div style={{ maxHeight: "30vh", maxWidth: "100%" }}>
+            <Bar
+              data={{
+                labels: topArr.labels,
+                datasets: [
+                  {
+                    label: "Top 3 Expenses",
+                    data: topArr.values,
+                    backgroundColor: [
+                      "rgba(255, 99, 132, 0.2)",
+                      "rgba(54, 162, 235, 0.2)",
+                      "rgba(255, 206, 86, 0.2)",
+                    ],
+                    borderColor: [
+                      "rgba(255, 99, 132, 1)",
+                      "rgba(54, 162, 235, 1)",
+                      "rgba(255, 206, 86, 1)",
+                    ],
+                    borderWidth: 1,
+                  },
+                ],
+              }}
+              height={100}
+              width={190}
+              options={{
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                  },
+                  x: {
+                    beginAtZero: true,
+                  },
+                },
+                maintainAspectRatio: false,
+              }}
+            />
+          </div>
+        )}
         {/* {!isChangingBudget && (
           <div style={{ width: "25%", padding: "1rem" }}>
             <h4>Monthly Budget: </h4>
