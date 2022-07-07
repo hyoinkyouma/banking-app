@@ -9,22 +9,15 @@ input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
 
-body {
-  zoom: 80%;
-}
-.nav-container {
-  height: 86.5vh !important;
-}
 .main-container {
   padding: 0 2rem;
-  width: 100%;
-  margin: 0;
+  width: 100% !important;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 3rem;
-  overflow: hidden;
   justify-content: center;
+  position: relative;
 }
 
 .row {
@@ -40,6 +33,9 @@ body {
 .scale-out {
   height: 0vh;
 }
+.login-container {
+  height: 100vh !important;
+}
 
 @media only screen and (max-width: 900px) {
   .nav-container {
@@ -48,7 +44,7 @@ body {
   #budgetModal {
     width: 100vw !important;
     height: fit-content !important;
-    max-height: 90vh !important;
+    max-height: 100vh !important;
   }
   #budgetModal div {
     width: 100% !important;

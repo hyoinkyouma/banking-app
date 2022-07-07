@@ -41,17 +41,17 @@ function LoginScreen(prop) {
   return (
     <>
       <div
-        className="container nav-container "
+        className="container"
         style={{
-          height: "100vh",
           display: "grid",
           gridAutoFlow: "column",
           alignItems: "center",
+          height: "100%",
         }}
       >
         <div className="row">
           <div className="col s12 m6 l4 offset-m3 offset-l4">
-            <div className="card">
+            <div className="card" style={{ margin: "8vh 0" }}>
               <div className="card-action center blue-grey darken-1 white-text">
                 <h3>Login</h3>
               </div>

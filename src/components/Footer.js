@@ -1,16 +1,21 @@
 const Footer = (prop) => {
   return (
     <>
-      <footer className="page-footer blue-grey">
-        <div className="container">
-          <div className="row"></div>
-        </div>
+      <footer className="page-footer blue-grey" style={{ width: "100%" }}>
+        <div className="container"></div>
         <div className="footer-copyright">
           <div className="container center">
-            © 2014 Copyright
+            © 2022 Copyright
             <a
               className="grey-text text-lighten-4 "
-              style={{ padding: "0 .3rem" }}
+              style={{
+                display: "grid",
+                gridAutoFlow: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "50%",
+                padding: "0 .3rem",
+              }}
               href="https://romanaugusto.tk"
             >
               Roman Cabalum

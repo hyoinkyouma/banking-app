@@ -103,7 +103,15 @@ function App() {
     );
   } else {
     return (
-      <div className="login-main">
+      <div
+        className="login-main"
+        style={{
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+        }}
+      >
         <Nav
           isLoggedIn={isLoggedIn}
           setLogin={setLogin}
